@@ -1,10 +1,9 @@
 package com.cydeo.test.day3_Css_getText;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.cydeo.test.utilites.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class T2_getText_getAttribute {
     public static void main(String[] args) {
@@ -12,8 +11,9 @@ public class T2_getText_getAttribute {
 
 //        TC #2: getText() and getAttribute() method practice
 //        1- Open a chrome browser
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        WebDriver driver = new ChromeDriver();
+        WebDriver driver = WebDriverFactory.getDriver("chrome");
         driver.manage().window().maximize();
 
 //        2- Go to: https://practice.cydeo.com/registration_form
