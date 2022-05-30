@@ -5,16 +5,18 @@ import org.testng.annotations.*;
 import static org.testng.Assert.assertEquals;
 
 public class P01_TestNG_Intro {
-    @Test
-    public void testOnePlusFive(){
 
+    @Test(priority = 2)
+    public void testOnePlusFive(){
+        System.out.println("Test One + Five is running");
         assertEquals(1+5,6);
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void testTenMinusFour() {
 
+        System.out.println("Test Ten - Four is running");
         assertEquals(10 - 4, 6);
     }
         @BeforeClass
