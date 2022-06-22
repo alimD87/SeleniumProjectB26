@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigurationReader {
+
     // 1- Create properties object
     // we make this private to be inaccessible from outside
     // make static because static runs first and before everything else and
@@ -26,8 +27,8 @@ public class ConfigurationReader {
         }
     }
 
-    public static String getProperty(String keyword){
+    public static String getProperty(String keyword) {
         return properties.getProperty(keyword);
     }
-}
 
+}
