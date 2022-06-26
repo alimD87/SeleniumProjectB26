@@ -1,0 +1,101 @@
+06/25/2022
+
+Today's schedule : - Actions practice
+                   - Page Object Model (POM)
+                   - Syncronization
+
+
+===============================================================================
+
+  - src
+        - main --> as a tester we don't need it and we deleted.
+        - test
+          - java
+           - com.cydeo
+             - test
+               - base
+             - utilities
+             - pages
+ - configuration.properties
+ - pom.xml
+
+
+--------------------------------------------------------------------------------
+
+- The reason we have created different packages, and different utility classes, different type of file (.properties) are
+    - re-usability
+    - to organize our code
+    - less code
+    - efficient
+    - easy to maintain
+    - to centralize
+    - avoid hard coding
+
+
+#1- configuration.properties : to centralize and avoid hard coding some of the important test data
+#2- TestBase: we can centralize and re-use setup/teardown methods, some important variables and objects etc.
+#3- ConfigurationReader : to be able to repeatedly and easily read from our configuration.properties file
+#4- Driver : to be able to instantiate our object in less line of code and also be able to steadily pass the same driver instance around in our project
+#5- BrowserUtils : to centralize and easy to re-use some of the general utility methods
+    - utility methods that are not specific to one page and can be applied in different pages
+
+--------------------------------------------------------------------------------
+
+Page Object Model Design Pattern (POM)
+
+#1- WHAT IS Page Object Model Design Pattern?
+
+    - Creating java class for each page of the web application.
+    - All of the related web elements to current page will be stored to its own .java class.
+    - We can also store related re-usable utility methods in its "page" class as well.
+
+
+- We have centralized pretty much everything re-usable such as:
+    - important test data: in our configuration.properties
+    - utility methods in utilities packages under different classes
+        - Driver
+        - ConfigurationReader
+        - BrowserUtils
+- The only thing that we didn't centralize or create a structure around is LOCATING WEB ELEMENTS.
+- PAGE OBJECT MODEL DESIGN PATTERN SOLVES THIS ISSUE WE CURRENTLY HAVE.
+
+--------------------------------------------------------------------------------
+
+- How are we going to implement POM Design Pattern?
+
+#1- Every time we create a java class for a new page of our application, we will initialize our driver instance and the object that class.
+
+    - PageFactory.initElements(Driver.getDriver() , this); --> // PageFactory is a selenium class that support Page Object Model
+                                                               // and it has method called initElements
+                                                               // once it's called , it will locate all the element
+                                                               // specified using @FindBy annotation with locator
+                                                               // initElements accept 2 arguments ,
+                                                               // WebDriver instance and Page class instance (this) means current instance of this class.
+
+    - This method basically initializes the driver instance and the object of the class.
+    - After this line we will be able to use THE OBJECT of the class, to reach the available web elements.
+
+#2- Instead of using .findElement method we will use @FindBy annotation
+
+- When we implement POM Design pattern we solve StaleElementReferenceException by default.
+
+- How it works?
+    - Every time we want to use WebElement located using @FindBy annotation, it will be re-located in the line we are using it.
+    - Basically it will automatically do a "freshness check" which will eliminate the StaleElementReferenceException
+
+=============================================================================
+
+
+  --- SYNCHRONIZATION ---
+
+- What is synchronization? Why do we need it?
+
+- Definition: Multiple things working at the same time.
+- We need synchronization because we need to make sure our driver and our browser are on the same page at all times.
+
+#1- Thread.sleep():
+    - This is not coming from Selenium library.
+    - This method comes from JAVA library
+    - It does not wait for ANY CONDITION TO HAPPEN.
+    - It will wait for the given duration no matter what.
+... (93 lines left)
